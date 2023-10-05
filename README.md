@@ -64,7 +64,7 @@ Other components included here:
 * [DocDiff](http://www.kt.rim.or.jp/~hisashim/docdiff/)
 * [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/)
 
-### Workflow
+## Workflow
 
 The workflow with the animation goes like this:
 
