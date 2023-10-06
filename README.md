@@ -1,9 +1,11 @@
 # epicdiff - diffs of epics, in an epic manner
 
-> **MAINTENANCE NOTE:** This code was split off from an earlier
-> repository, so history stuff is not here. I'm going to eventually
-> tidy it up a little bit so that it might run under Processing
-> 4 or something.
+> **MAINTENANCE NOTE:**
+> The original code in this repository is from 2010-2011.
+> This code was split off from an earlier
+> repository, so Git history is sadly not here.
+> I'm going to eventually tidy the project up a little bit
+> so that it might run under modern Processing versions.
 
 epicdiff is a app suite for creating illustrative and entertaining
 animations out of docdiff-produced diffs. It was basically written so
@@ -32,12 +34,10 @@ version 3. See "COPYING".
 
 Other components included here:
 
-* The included ["Anonymous Pro" font, by Mark Simonson](http://www.ms-studio.com/FontSales/anonymouspro.html), is distributed
-  under the Open Font License. See `data/AnonymousPro.\*.txt`.
+* The included ["Anonymous Pro" font, by Mark Simonson](https://www.marksimonson.com/fonts/view/anonymous-pro), is distributed
+  under the Open Font License. See `data/AnonymousPro.*.txt`.
 
 ## Dependencies
-
-(TODO: check the links)
 
 ### Animation software
 
@@ -54,15 +54,21 @@ Other components included here:
   library version 0.7 and fairly freshish GStreamer in
   Debian Unstable.
 
-(**MAINTENANCE NOTE:** As stated, these versions are ancient.)
+(**MAINTENANCE NOTE:** As stated, these versions are ancient. GSVideo in
+particular is *exceedingly* obsolete, as the video facility in
+Processing 2+ is based on it and included by default.)
 
-### Conversion tool
+### Conversion tool and gitsplode
 
-* Probably some sort of POSIX userland. (Needs the wc(1) tool.)
+You probably need some sort of POSIX userland. The tools require
+the regular wc(1) tool, and gitsplode also needs Git, obviously.
+I have not tried to run these under Windows but these probably
+should be possible to be ported to run.
+
 * [Ruby](http://www.ruby-lang.org/en/)
-  * [RMagick](http://rmagick.rubyforge.org/) `gem install rmagick`
-* [DocDiff](http://www.kt.rim.or.jp/~hisashim/docdiff/)
-* [wkhtmltopdf](http://code.google.com/p/wkhtmltopdf/)
+  * [RMagick](https://rmagick.github.io/) `gem install rmagick`
+* [DocDiff](https://github.com/hisashim/docdiff)
+* [wkhtmltopdf](https://wkhtmltopdf.org/)
 
 ## Workflow
 
@@ -88,7 +94,7 @@ The workflow with the animation goes like this:
   * Convert the HTML to PDF using wkhtmltopdf
   * analyse, resize and convert the pages using RMagick
   * Produce yet another damn XML file with more summary data. Why
-  * make one XML file when you can make two =)
+    make one XML file when you can make two 😄
 * Slurp the XML summary and image files from individual pages in the
   Processing program, which will *clearly* animate the resulting
   pages and hopefully produce a nice little video file.
@@ -111,21 +117,13 @@ the commit date, and also spits out an XML summary file
 (`summary.xml`) that is pretty much self-explanatory:
 
 ```xml
-    <commitdata>
-        <commit>
-            <filename>foo.1234_56_78.12_34_56.txt</filename>
-            <date unix="123456">Thursday of Human-Readable Date Whenever</date>
-            <message>This is a commit message and stuff...</message>
-        </commit>
-      <!-- ... -->
-    </commitdata>
+<commitdata>
+    <commit>
+        <filename>foo.1234_56_78.12_34_56.txt</filename>
+        <date unix="123456">Thursday of Human-Readable Date Whenever</date>
+        <message>This is a commit message and stuff...</message>
+    </commit>
+    <!-- ... -->
+</commitdata>
 ```
 
-### Requirements
-
-* Ruby. Dunno what versions. Worked fine on 1.9, seems to run on 2.x
-  just fine. It only uses standard library REXML at the moment, but I
-  may migrate to Nokogiri at some point, so get yer gems ready.
-* Git. Normal Debian junk. Not sure what extras. Requires command line
-  calls so I will check out if it can be made to run at all on
-  Windows, but I doubt it.
